@@ -21,7 +21,8 @@ header{position:sticky;top:0;z-index:5;background:rgba(255,255,255,.82);backdrop
 .top{display:flex;align-items:center;gap:20px;height:52px}
 .logo{font-weight:700;color:var(--t);text-decoration:none;margin-right:auto}
 nav a{color:var(--t);opacity:.8;text-decoration:none;font-size:.85rem;margin-left:18px}
-@media (max-width:700px){nav{display:none}}
+nav a[aria-current]{color:var(--c);opacity:1;font-weight:600}
+@media (max-width:900px){.top{flex-wrap:wrap;height:auto;padding-top:8px;padding-bottom:8px;row-gap:6px}nav{order:3;width:100%;overflow-x:auto;white-space:nowrap;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent)}nav::-webkit-scrollbar{display:none}nav a{margin:0 16px 0 0;display:inline-block;padding:4px 0}}
 .bt{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:12px 22px;background:var(--c);color:#fff;text-decoration:none;font-weight:500;border:0}
 .bt.z{background:var(--z)}.bt.c{background:#E8E8ED;color:var(--t)}.bt.s{padding:8px 16px;font-size:.88rem}
 .migalha{font-size:.82rem;color:var(--t2);padding:16px 0 0}.migalha a{color:var(--t2)}
@@ -68,7 +69,7 @@ footer nav{display:flex;flex-wrap:wrap;gap:8px 18px}footer nav a{margin:0;color:
 </head>
 <body>
 <header><div class="w top"><a class="logo" href="../index.html">Kolmaq Informática</a>
-<nav aria-label="Principal"><a href="../manutencao-de-impressoras/index.html">Impressoras</a><a href="../assistencia-tecnica-notebook/index.html">Notebooks</a><a href="../conserto-de-computadores/index.html">Computadores</a><a href="../quem-somos/index.html">Quem somos</a><a href="../contato/index.html">Contato</a></nav>
+<nav aria-label="Principal"><a href="../manutencao-de-impressoras/index.html">Impressoras</a><a href="../assistencia-tecnica-notebook/index.html">Notebooks</a><a href="../conserto-de-computadores/index.html" aria-current="page">Computadores</a><a href="../conserto-de-tv/index.html">Televisores</a><a href="../conserto-de-celular/index.html">Celulares</a><a href="../conserto-de-videogame/index.html">Videogames</a><a href="../quem-somos/index.html">Quem somos</a><a href="../contato/index.html">Contato</a></nav>
 <a class="bt z s" href="https://wa.me/555132210947?text=Ol%C3%A1%2C%20Kolmaq%21%20Vim%20pelo%20site." target="_blank" rel="noopener">WhatsApp</a></div></header>
 <main>
 <div class="w migalha" aria-label="Você está em"><a href="../index.html">Início</a> › Conserto de Computadores em Porto Alegre</div>
