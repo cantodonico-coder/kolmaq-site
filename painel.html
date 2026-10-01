@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Kolmaq — Ordens de serviço</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--papel:#fff;--papel2:#F2F5F8;--tinta:#1A2230;--tinta2:#55606F;--linha:#DCE2EA;--c:#0098D4;--m:#D81B7E;--y:#F5C400;--zap:#1FAF54;
+  --fh:"Archivo","Arial Narrow",system-ui,sans-serif;--fb:"IBM Plex Sans",system-ui,sans-serif;box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;font:15px/1.5 var(--fb);color:var(--tinta);background:var(--papel2)}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--c);outline-offset:2px}
+h1,h2{font-family:var(--fh);font-variation-settings:"wdth" 112;margin:0;line-height:1.15}
+.cmyk{display:flex;height:5px}.cmyk i{flex:1}.cmyk i:nth-child(1){background:var(--c)}.cmyk i:nth-child(2){background:var(--m)}.cmyk i:nth-child(3){background:var(--y)}.cmyk i:nth-child(4){background:var(--tinta)}
+.btn{border:0;border-radius:999px;padding:10px 18px;font-weight:600;cursor:pointer;background:var(--tinta);color:#fff;display:inline-flex;gap:6px;align-items:center;justify-content:center}
+.btn.zap{background:var(--zap)}.btn.claro{background:var(--papel2);color:var(--tinta)}.btn:disabled{opacity:.5}
+input,select,textarea{border:1px solid var(--linha);border-radius:8px;padding:10px 12px;background:#fff;width:100%}
+textarea{min-height:80px;resize:vertical}
+label{display:flex;flex-direction:column;gap:4px;font-size:.85rem;color:var(--tinta2)}
+.login{max-width:420px;margin:10vh auto;background:#fff;border-radius:14px;padding:28px;display:grid;gap:14px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:#fff;border-bottom:1px solid var(--linha)}
+.topo{max-width:1100px;margin:0 auto;padding:12px 16px;display:flex;gap:10px;align-items:center}
+.topo h1{font-size:1.15rem;margin-right:auto}
+main{max-width:1100px;margin:0 auto;padding:16px}
+.filtros{display:flex;gap:6px;overflow-x:auto;padding:10px 0}
+.filtros button{border:1px solid var(--linha);background:#fff;border-radius:999px;padding:6px 12px;white-space:nowrap;cursor:pointer}
+.filtros button[aria-pressed="true"]{background:var(--tinta);color:#fff;border-color:var(--tinta)}
+.lista{display:grid;gap:8px}
+.card{background:#fff;border:1px solid var(--linha);border-radius:10px;padding:12px 14px;display:grid;grid-template-columns:1fr auto;gap:2px 12px;cursor:pointer;text-align:left;width:100%}
+.card:hover{border-color:var(--c)}
+.card b{font-family:var(--fh)}.card small{color:var(--tinta2)}
+.st{font-size:.78rem;font-weight:600;border-radius:999px;padding:3px 10px;align-self:start;white-space:nowrap;background:var(--papel2)}
+.st[data-s="Recebido"],.st[data-s="Em análise"]{background:#E6F4FB;color:#00658E}
+.st[data-s="Orçamento enviado"]{background:#FFF6CC;color:#7A6000}
+.st[data-s="Aprovado"],.st[data-s="Em manutenção"]{background:#FCE4F1;color:#9C1259}
+.st[data-s="Pronto para retirada"]{background:#DDF5E7;color:#11703E}
+.st[data-s="Entregue"]{background:var(--papel2);color:var(--tinta2)}
+.vazio{text-align:center;color:var(--tinta2);padding:40px 0}
+.veu{position:fixed;inset:0;background:rgba(10,15,25,.45);z-index:10;display:none}.veu.on{display:block}
+.gav{position:fixed;top:0;right:0;height:100%;width:min(560px,100%);background:#fff;z-index:11;transform:translateX(100%);transition:transform .2s;display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.gav.on{transform:none}
+.gav .cab{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-bottom:1px solid var(--linha)}
+.gav .corpo{flex:1;overflow-y:auto;padding:16px 18px;display:grid;grid-template-columns:1fr 1fr;gap:12px;align-content:start}
+.full{grid-column:1/-1}
+.gav .rod{padding:12px 18px;border-top:1px solid var(--linha);display:flex;gap:8px;flex-wrap:wrap}
+.gav .rod .btn{flex:1}
+.codigo{grid-column:1/-1;background:var(--papel2);border-radius:10px;padding:12px;display:flex;justify-content:space-between;align-items:center}
+.codigo b{font-family:var(--fh);font-size:1.5rem;letter-spacing:.12em}
+.hist{grid-column:1/-1;font-size:.85rem;color:var(--tinta2);margin:0;padding-left:18px}
+.fechar{background:var(--papel2);border:0;border-radius:50%;width:34px;height:34px;cursor:pointer}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--tinta);color:#fff;padding:10px 18px;border-radius:999px;opacity:0;transition:.2s;z-index:20;pointer-events:none}.toast.on{opacity:1}
+@media (max-width:520px){.gav .corpo{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div id="telaLogin" class="login">
+  <h1>Kolmaq · Ordens de serviço</h1>
+  <label>Endereço do sistema (termina em /exec)<input id="lUrl" placeholder="https://script.google.com/macros/s/.../exec"></label>
+  <label>Senha<input id="lSenha" type="password"></label>
+  <label>Endereço do site (para o link enviado ao cliente)<input id="lSite" placeholder="https://kolmaq.com.br"></label>
+  <label>Link de avaliação no Google (opcional)<input id="lAval" placeholder="https://g.page/r/..."></label>
+  <button class="btn" id="entrar">Entrar</button>
+  <p id="lErro" style="color:var(--m);margin:0"></p>
+</div>
+
+<div id="telaApp" hidden>
+  <header>
+    <div class="topo"><h1>Ordens de serviço</h1><button class="btn" id="nova">+ Nova OS</button><button class="btn claro" id="atualizar" aria-label="Atualizar lista">↻</button><button class="btn claro" id="sair">Sair</button></div>
+    <div class="cmyk"><i></i><i></i><i></i><i></i></div>
+  </header>
+  <main>
+    <input id="busca" type="search" placeholder="Buscar por OS, cliente, telefone ou equipamento">
+    <div class="filtros" id="filtros"></div>
+    <div class="lista" id="lista"><p class="vazio">Carregando…</p></div>
+  </main>
+</div>
+
+<div class="veu" id="veu"></div>
+<aside class="gav" id="gav" aria-hidden="true">
+  <div class="cab"><h2 id="gTit">Nova OS</h2><button class="fechar" id="fechar" aria-label="Fechar">✕</button></div>
+  <form class="corpo" id="form" autocomplete="off">
+    <div class="codigo" id="boxCod" hidden><span>Código do cliente</span><b id="gCod"></b></div>
+    <label>Cliente<input name="cliente" required></label>
+    <label>Telefone / WhatsApp<input name="telefone" inputmode="tel" required></label>
+    <label>Equipamento<input name="equipamento" list="equips" required></label>
+    <label>Marca e modelo<input name="marca_modelo"></label>
+    <label class="full">Defeito relatado<textarea name="defeito"></textarea></label>
+    <label class="full">Acessórios deixados<input name="acessorios" placeholder="Ex.: fonte, cabo USB, cartucho"></label>
+    <label>Status<select name="status" id="selStatus"></select></label>
+    <label>Previsão<input name="previsao" type="date"></label>
+    <label>Valor do orçamento (R$)<input name="orcamento_valor" type="number" step="0.01" min="0"></label>
+    <label class="full">Descrição do orçamento (o cliente vê)<textarea name="orcamento_desc"></textarea></label>
+    <label class="full">Observação interna (o cliente não vê)<textarea name="obs_interna"></textarea></label>
+    <ul class="hist" id="gHist"></ul>
+  </form>
+  <div class="rod">
+    <button class="btn" id="salvar">Salvar</button>
+    <button class="btn zap" id="avisar" hidden>Avisar cliente</button>
+    <button class="btn claro" id="imprimir" hidden>Imprimir comprovante</button>
+  </div>
+</aside>
+<datalist id="equips"><option>Impressora</option><option>Notebook</option><option>Computador</option><option>Televisão</option><option>Celular</option><option>Videogame</option><option>Projetor</option><option>Monitor</option></datalist>
+<div class="toast" id="toast" role="status"></div>
+<iframe id="imp" title="Impressão" style="position:absolute;width:0;height:0;border:0"></iframe>
+
+<script>
+const LOJA={nome:'Kolmaq Informática',end:'Av. Alberto Bins, 732 - Centro, Porto Alegre - RS',tel:'(51) 3221-0947',horario:'Seg a sex 8h30–18h · Sáb 8h30–12h'};
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const brl=v=>Number(v||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+const ls={get:k=>{try{return localStorage.getItem('kolmaq.'+k)||''}catch{return''}},set:(k,v)=>{try{localStorage.setItem('kolmaq.'+k,v)}catch{}}};
+let CFG={url:ls.get('url'),chave:ls.get('chave'),site:ls.get('site')||'https://kolmaq.com.br',aval:ls.get('aval')};
+let LISTA=[],STATUS=[],filtro='Abertas',atual=null;
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('on'),2200)}
+
+async function api(acao,extra){
+  const r=await fetch(CFG.url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({acao,chave:CFG.chave,...extra})});
+  const j=await r.json(); if(!j.ok)throw new Error(j.erro||'Erro'); return j;
+}
+
+/* login */
+$('#lUrl').value=CFG.url;$('#lSite').value=CFG.site;$('#lAval').value=CFG.aval;
+$('#entrar').onclick=async()=>{
+  CFG={url:$('#lUrl').value.trim(),chave:$('#lSenha').value.trim(),site:($('#lSite').value.trim()||'https://kolmaq.com.br').replace(/\/$/,''),aval:$('#lAval').value.trim()};
+  $('#lErro').textContent='';$('#entrar').disabled=true;
+  try{await api('entrar');Object.entries(CFG).forEach(([k,v])=>ls.set(k,v));iniciar()}
+  catch(e){$('#lErro').textContent=e.message==='Senha incorreta'?'Senha incorreta.':'Não conectou. Confira o endereço do sistema.'}
+  $('#entrar').disabled=false;
+};
+$('#lSenha').addEventListener('keydown',e=>{if(e.key==='Enter')$('#entrar').click()});
+$('#sair').onclick=()=>{ls.set('chave','');location.reload()};
+
+async function iniciar(){
+  $('#telaLogin').hidden=true;$('#telaApp').hidden=false;await carregar();
+}
+async function carregar(){
+  try{const j=await api('listar');LISTA=j.lista;STATUS=j.status;
+    $('#selStatus').innerHTML=STATUS.map(s=>`<option>${s}</option>`).join('');renderLista()}
+  catch(e){if(e.message==='Senha incorreta'){ls.set('chave','');location.reload()}else $('#lista').innerHTML='<p class="vazio">Sem conexão com o sistema. Toque em ↻ para tentar de novo.</p>'}
+}
+$('#atualizar').onclick=carregar;
+
+const FECHADAS=['Entregue','Orçamento recusado','Sem conserto'];
+function renderLista(){
+  const conta=s=>LISTA.filter(o=>s==='Todas'||(s==='Abertas'?!FECHADAS.includes(o.status):o.status===s)).length;
+  $('#filtros').innerHTML=['Abertas',...STATUS,'Todas'].map(s=>`<button aria-pressed="${s===filtro}" data-f="${s}">${s} (${conta(s)})</button>`).join('');
+  const q=$('#busca').value.toLowerCase().trim();
+  const l=LISTA.filter(o=>(filtro==='Todas'||(filtro==='Abertas'?!FECHADAS.includes(o.status):o.status===filtro))
+    &&(!q||[o.os,o.cliente,o.telefone,o.equipamento,o.marca_modelo,o.codigo].join(' ').toLowerCase().includes(q)));
+  $('#lista').innerHTML=l.length?l.map(o=>`<button class="card" data-os="${esc(o.os)}">
+    <b>${esc(o.os)} · ${esc(o.cliente)}</b><span class="st" data-s="${esc(o.status)}">${esc(o.status)}</span>
+    <small>${esc(o.equipamento)} ${esc(o.marca_modelo)} · entrada ${esc(String(o.entrada).slice(0,10))}${o.previsao?' · previsão '+esc(o.previsao):''}</small></button>`).join('')
+    :'<p class="vazio">Nenhuma OS aqui. Toque em + Nova OS para registrar um equipamento.</p>';
+}
+$('#filtros').onclick=e=>{const b=e.target.closest('[data-f]');if(b){filtro=b.dataset.f;renderLista()}};
+$('#busca').oninput=renderLista;
+
+/* editor */
+function abrir(o){
+  atual=o||null;const f=$('#form');f.reset();
+  $('#gTit').textContent=o?o.os:'Nova OS';
+  if(o){['cliente','telefone','equipamento','marca_modelo','defeito','acessorios','status','orcamento_desc','obs_interna'].forEach(k=>f[k].value=o[k]??'');
+    f.previsao.value=o.previsao_iso||'';f.orcamento_valor.value=o.orcamento_valor||'';}
+  else f.status.value='Recebido';
+  $('#boxCod').hidden=!o;$('#gCod').textContent=o?o.codigo:'';
+  $('#gHist').innerHTML=o?(o.historico||[]).map(h=>`<li>${esc(h.d)} · ${esc(h.s)}${h.n?' ('+esc(h.n)+')':''}</li>`).join(''):'';
+  $('#avisar').hidden=$('#imprimir').hidden=!o;$('#avisar').textContent='Avisar cliente';
+  $('#veu').classList.add('on');$('#gav').classList.add('on');$('#gav').setAttribute('aria-hidden','false');
+  setTimeout(()=>f.cliente.focus(),250);
+}
+function fechar(){$('#veu').classList.remove('on');$('#gav').classList.remove('on');$('#gav').setAttribute('aria-hidden','true')}
+$('#nova').onclick=()=>abrir(null);$('#fechar').onclick=fechar;$('#veu').onclick=fechar;
+document.addEventListener('keydown',e=>{if(e.key==='Escape')fechar()});
+$('#lista').onclick=e=>{const b=e.target.closest('[data-os]');if(b)abrir(LISTA.find(o=>o.os===b.dataset.os))};
+
+$('#salvar').onclick=async()=>{
+  const f=$('#form');
+  if(!f.cliente.value.trim()||!f.telefone.value.trim()||!f.equipamento.value.trim()){toast('Preencha cliente, telefone e equipamento');return}
+  const d=Object.fromEntries(new FormData(f));if(atual)d.os=atual.os;
+  const mudouStatus=!atual||atual.status!==d.status;
+  $('#salvar').disabled=true;
+  try{const j=await api('salvar',{os:d});const o=j.os;
+    const i=LISTA.findIndex(x=>x.os===o.os);i>=0?LISTA[i]=o:LISTA.unshift(o);renderLista();abrir(o);
+    toast(i>=0?'OS salva':'OS criada: '+o.os);
+    if(mudouStatus)$('#avisar').textContent='Avisar cliente: '+o.status;
+  }catch(e){toast(e.message)}
+  $('#salvar').disabled=false;
+};
+
+/* WhatsApp para o cliente */
+const zapUrl=(n,t)=>{const m=encodeURIComponent(t);return /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)?'https://wa.me/'+n+'?text='+m:'https://web.whatsapp.com/send?phone='+n+'&text='+m};
+function msgCliente(o){
+  const nome=String(o.cliente||'').split(' ')[0];const link=CFG.site+'/?os='+o.codigo+'#os';
+  const eq=(o.equipamento+' '+(o.marca_modelo||'')).trim();
+  const m={
+    'Recebido':`Olá, ${nome}! Recebemos seu ${eq} na Kolmaq. Sua ordem de serviço é ${o.os}. Acompanhe o andamento pelo código ${o.codigo}: ${link}`,
+    'Orçamento enviado':`Olá, ${nome}! O orçamento da ${o.os} (${eq}) ficou em ${brl(o.orcamento_valor)}.${o.orcamento_desc?'\n'+o.orcamento_desc:''}\n\nVocê pode aprovar ou recusar por aqui: ${link}\nOu responda esta mensagem.`,
+    'Pronto para retirada':`Olá, ${nome}! Seu ${eq} (${o.os}) está pronto para retirada.\n${LOJA.end}\n${LOJA.horario}\nTraga o comprovante ou informe o código ${o.codigo}.`,
+    'Entregue':`Olá, ${nome}! Obrigado por escolher a Kolmaq. Qualquer dúvida sobre o serviço da ${o.os}, é só chamar.${CFG.aval?'\n\nSe ficou satisfeito, sua avaliação no Google ajuda muito: '+CFG.aval:''}`
+  };
+  return m[o.status]||`Olá, ${nome}! Atualização da ${o.os} (${eq}): ${o.status}.${o.previsao?' Previsão: '+o.previsao+'.':''} Acompanhe: ${link}`;
+}
+$('#avisar').onclick=()=>{
+  if(!atual)return;let n=String(atual.telefone).replace(/\D/g,'');if(!n){toast('OS sem telefone');return}
+  if(!n.startsWith('55'))n='55'+n;
+  const a=document.createElement('a');a.href=zapUrl(n,msgCliente(atual));a.target='kolmaqzap';a.rel='noopener';a.click();
+};
+
+/* comprovante (2 vias) */
+$('#imprimir').onclick=()=>{
+  const o=atual;if(!o)return;
+  const via=t=>`<section><div class="t"><b>${LOJA.nome}</b><span>${t}</span></div><small>${LOJA.end} · ${LOJA.tel}</small>
+  <h2>${esc(o.os)}</h2><p class="cod">Código para consulta: <b>${esc(o.codigo)}</b><br><small>${esc(CFG.site.replace(/^https?:\/\//,''))} → Acompanhe seu conserto</small></p>
+  <table><tr><th>Entrada</th><td>${esc(o.entrada)}</td></tr><tr><th>Cliente</th><td>${esc(o.cliente)}</td></tr><tr><th>Telefone</th><td>${esc(o.telefone)}</td></tr>
+  <tr><th>Equipamento</th><td>${esc(o.equipamento)} ${esc(o.marca_modelo)}</td></tr><tr><th>Defeito relatado</th><td>${esc(o.defeito)}</td></tr><tr><th>Acessórios</th><td>${esc(o.acessorios)||'Nenhum'}</td></tr></table>
+  <p class="obs">Guarde este comprovante: ele é necessário para retirar o equipamento.</p>
+  <div class="ass"><span>Assinatura do cliente</span><span>Kolmaq</span></div></section>`;
+  const html=`<!DOCTYPE html><html><head><meta charset="utf-8"><title>${esc(o.os)}</title><style>
+  body{font:12px/1.4 Arial,sans-serif;margin:0;color:#000}section{padding:14px 18px;height:48vh;box-sizing:border-box}section+section{border-top:1px dashed #999}
+  .t{display:flex;justify-content:space-between;font-size:14px}h2{margin:8px 0 2px;font-size:20px}.cod b{font-size:18px;letter-spacing:2px}
+  table{width:100%;border-collapse:collapse;margin-top:6px}th{text-align:left;width:120px;color:#444;font-weight:normal;vertical-align:top}td,th{padding:2px 0}
+  .obs{margin:8px 0}.ass{display:flex;gap:30px;margin-top:26px}.ass span{flex:1;border-top:1px solid #000;padding-top:3px;text-align:center}
+  @page{size:A4;margin:10mm}</style></head><body>${via('Via do cliente')}${via('Via da loja')}</body></html>`;
+  const f=$('#imp');f.srcdoc=html;f.onload=()=>{f.contentWindow.focus();f.contentWindow.print()};
+};
+
+if(CFG.url&&CFG.chave)iniciar();
+</script>
+</body>
+</html>
