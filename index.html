@@ -613,6 +613,34 @@ footer{background:var(--papel2);border-top:1px solid #E8E8ED;font-size:.8rem}
 .hero .h1big{font-family:var(--fh);font-weight:700;font-size:clamp(2.6rem,5.2vw,4.4rem);line-height:1.02;margin:18px 0 20px;letter-spacing:-.03em;color:var(--tinta);max-width:none}
 .heroGrid{align-items:center}
 @media (max-width:600px){.hero .h1big{font-size:2.5rem}}
+
+/* ===== menu com segmentos ===== */
+nav.menu{display:flex;align-items:center}
+.sub-menu{position:relative;margin-left:22px}
+.smBtn{background:none;border:0;font:inherit;font-size:.82rem;color:var(--tinta);opacity:.8;cursor:pointer;padding:0}
+.smBtn:hover,.sub-menu.aberto .smBtn{opacity:1}
+.smLista{position:absolute;top:calc(100% + 16px);left:50%;transform:translateX(-50%) translateY(8px);width:min(660px,92vw);background:#fff;border-radius:22px;box-shadow:0 30px 70px -25px rgba(0,0,0,.35),0 0 0 1px rgba(0,0,0,.05);padding:14px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;opacity:0;visibility:hidden;transition:opacity .18s,transform .18s,visibility .18s;z-index:40}
+.smLista::before{content:"";position:absolute;left:0;right:0;top:-18px;height:18px}
+.sub-menu:hover .smLista,.sub-menu:focus-within .smLista,.sub-menu.aberto .smLista{opacity:1;visibility:visible;transform:translateX(-50%)}
+nav .smItem{display:flex;flex-direction:column;gap:1px;padding:8px;border-radius:14px;text-decoration:none;color:var(--tinta);margin:0;opacity:1;font-size:inherit}
+.smItem:hover{background:var(--papel2)}
+.smItem img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:10px;margin-bottom:6px;background:var(--papel2)}
+.smItem span{font-weight:600;font-size:.92rem}.smItem small{color:var(--tinta2);font-size:.76rem}
+nav .smTodos{grid-column:1/-1;text-align:center;padding:10px;margin:0;color:var(--c);opacity:1;font-size:.88rem;border-top:1px solid #E8E8ED}
+.hamb{display:none}
+a.sfoto{display:block}
+.saiba{font-weight:500}
+@media (max-width:760px){
+ .hamb{display:grid;place-items:center;width:40px;height:40px;border:0;background:transparent;font-size:1.35rem;color:var(--tinta);cursor:pointer;margin-left:4px}
+ nav.menu{display:none;position:fixed;left:0;right:0;bottom:0;top:calc(52px + env(safe-area-inset-top,0px));background:#fff;flex-direction:column;align-items:stretch;padding:8px 20px calc(40px + env(safe-area-inset-bottom,0px));overflow-y:auto;z-index:30}
+ nav.menu.aberto{display:flex}
+ nav.menu>a{margin:0;padding:15px 0;border-bottom:1px solid #E8E8ED;font-size:1.1rem;opacity:1}
+ .sub-menu{margin:0;border-bottom:1px solid #E8E8ED;padding:15px 0}
+ .smBtn{font-size:1.1rem;opacity:1;pointer-events:none}.smBtn span{display:none}
+ .smLista{position:static;transform:none!important;opacity:1;visibility:visible;box-shadow:none;width:auto;padding:12px 0 0;grid-template-columns:1fr 1fr;border-radius:0}
+ .smLista::before{display:none}
+}
+body.menuAberto header{backdrop-filter:none;-webkit-backdrop-filter:none;background:#fff}
 </style>
 </head>
 <body>
@@ -831,10 +859,13 @@ footer{background:var(--papel2);border-top:1px solid #E8E8ED;font-size:.8rem}
 <header>
   <div class="wrap topo">
     <a href="#inicio" class="marca" id="marca">Loja</a>
-    <nav aria-label="Seções">
-      <a href="#promocoes">Ofertas</a><a href="#produtos">Produtos</a><a href="#servicos">Serviços</a><a href="#orcamento">Orçamento</a><a href="#empresa">Empresa</a><a href="#faq">Ajuda</a><a href="#os">Área do cliente</a><a href="#local">Onde estamos</a>
+    <nav class="menu" id="menu" aria-label="Seções">
+      <a href="#promocoes">Ofertas</a><a href="#produtos">Produtos</a>
+      <div class="sub-menu" id="subMenu"><button class="smBtn" aria-expanded="false" aria-controls="smLista">Serviços <span aria-hidden="true">▾</span></button>
+        <div class="smLista" id="smLista"><a class="smItem" href="manutencao-de-impressoras/index.html"><img data-ilusfix="impressora" alt="" width="160" height="120"><span>Impressoras</span><small>Manutenção e conserto</small></a><a class="smItem" href="assistencia-tecnica-notebook/index.html"><img data-ilusfix="notebook" alt="" width="160" height="120"><span>Notebooks</span><small>Assistência técnica</small></a><a class="smItem" href="conserto-de-computadores/index.html"><img data-ilusfix="computador" alt="" width="160" height="120"><span>Computadores</span><small>Conserto e upgrade</small></a><a class="smItem" href="conserto-de-tv/index.html"><img data-ilusfix="tv" alt="" width="160" height="120"><span>Televisores</span><small>Conserto de TV</small></a><a class="smItem" href="conserto-de-celular/index.html"><img data-ilusfix="celular" alt="" width="160" height="120"><span>Celulares</span><small>Tela, bateria e carga</small></a><a class="smItem" href="conserto-de-videogame/index.html"><img data-ilusfix="videogame" alt="" width="160" height="120"><span>Videogames</span><small>PlayStation, Xbox, Nintendo</small></a><a class="smTodos" href="#servicos">Ver todos os serviços ›</a></div></div><a href="#orcamento">Orçamento</a><a href="#empresa">Empresa</a><a href="#faq">Ajuda</a><a href="#os">Área do cliente</a><a href="#local">Onde estamos</a>
     </nav>
     <button class="carBtn" id="abrirCar" aria-label="Abrir carrinho">🛒<span class="txtCar"> Carrinho</span> <b id="qtdCar">0</b></button>
+    <button class="hamb" id="hamb" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu">☰</button>
   </div>
   <div class="cmyk" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 </header>
@@ -1089,7 +1120,7 @@ function render(){
   $('#promocoes').hidden=!D.promocoes.length;
   $('#filtros').innerHTML=['Todos',...D.categorias].map(c=>`<button aria-pressed="${c===filtro}">${esc(c)}</button>`).join('');
   renderGrade();
-  $('#listaServ').innerHTML=D.servicos.map(s=>`<div class="serv"><div class="sfoto"><img src="${esc(fotoDe(s.foto,s.nome))}" data-ilus="${ilusDe(s.nome)}" alt="${esc(s.nome)}" loading="lazy"></div><h3>${esc(s.nome)}</h3>
+  $('#listaServ').innerHTML=D.servicos.map(s=>`<div class="serv">${(t=>pgServ(s.nome)?`<a class="sfoto" href="${pgServ(s.nome)}/index.html" aria-label="${esc(s.nome)}: saiba mais">${t}</a>`:`<div class="sfoto">${t}</div>`)(`<img src="${esc(fotoDe(s.foto,s.nome))}" data-ilus="${ilusDe(s.nome)}" alt="${esc(s.nome)}" loading="lazy">`)}<h3>${esc(s.nome)}</h3>
     <div class="lado">${pgServ(s.nome)?`<a class="saiba" href="${pgServ(s.nome)}/index.html">Saiba mais ›</a>`:''}${s.preco>0?`<small>a partir de</small><div>${brl(s.preco)}</div>`:''}<button class="btn peq zap" data-zap="Olá! Quero um orçamento de: ${esc(s.nome)}">Orçar no WhatsApp</button></div>
     <p>${esc(s.desc)}${s.prazo?' · Prazo: '+esc(s.prazo):''}</p></div>`).join('');
   $('#deps').innerHTML=D.depoimentos.map(d=>`<div class="dep"><p>“${esc(d.texto)}”</p><b>${esc(d.nome)}</b></div>`).join('');
@@ -1351,6 +1382,7 @@ const DISP=[
  {k:'videogame',n:'Videogame',serv:/videog/i,sint:['Não liga','Superaquecendo','Não lê disco','Controle com defeito','Sem imagem (HDMI)']}
 ];
 let mg={d:null,s:new Set()};
+const PGSEG={impressora:'manutencao-de-impressoras',notebook:'assistencia-tecnica-notebook',computador:'conserto-de-computadores',tv:'conserto-de-tv',celular:'conserto-de-celular',videogame:'conserto-de-videogame'};
 function montarMago(){
   $('#dispos').innerHTML=DISP.map(d=>`<button class="dispo" data-d="${d.k}"><img src="${ILUS[d.k]}" alt=""><span>${d.n}</span></button>`).join('');
 }
@@ -1375,7 +1407,8 @@ $('#magoOk').onclick=()=>{
    <ul class="resLista">${lista.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>
    ${sv&&sv.desc?`<p>${esc(sv.desc)}</p>`:''}
    <button class="btn zap" style="width:100%" data-zap="${esc(msg)}">Receber orçamento no WhatsApp</button>
-   <button class="btn claro" style="width:100%" id="magoLoja">Prefiro levar na loja</button>`;
+   <button class="btn claro" style="width:100%" id="magoLoja">Prefiro levar na loja</button>
+   ${PGSEG[mg.d.k]?`<a class="link" style="display:block;text-align:center;margin:14px 0 0" href="${PGSEG[mg.d.k]}/index.html">Saiba mais sobre ${esc(mg.d.n.toLowerCase())} ›</a>`:''}`;
   irEtapa(3);
 };
 $('#resultado').addEventListener('click',e=>{if(e.target.id==='magoLoja')$('#local').scrollIntoView()});
@@ -1395,6 +1428,15 @@ document.addEventListener('pointermove',e=>{const c=e.target.closest('.prod,.ser
 document.documentElement.classList.add('js');
 const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');io.unobserve(x.target)}}),{rootMargin:'0px 0px -8% 0px'});
 document.querySelectorAll('main section:not(.hero) .wrap').forEach(w=>{w.classList.add('rev');io.observe(w)});
+
+/* ---------- menu de segmentos ---------- */
+document.querySelectorAll('img[data-ilusfix]').forEach(i=>i.src=ILUS[i.dataset.ilusfix]);
+function menuMobile(abrir){$('#menu').classList.toggle('aberto',abrir);$('#hamb').setAttribute('aria-expanded',abrir);$('#hamb').textContent=abrir?'✕':'☰';document.body.style.overflow=abrir?'hidden':'';document.body.classList.toggle('menuAberto',abrir)}
+$('#hamb').onclick=()=>menuMobile(!$('#menu').classList.contains('aberto'));
+$('#menu').addEventListener('click',e=>{if(e.target.closest('a'))menuMobile(false);$('#subMenu').classList.remove('aberto')});
+$('.smBtn').onclick=e=>{e.stopPropagation();const a=!$('#subMenu').classList.contains('aberto');$('#subMenu').classList.toggle('aberto',a);e.currentTarget.setAttribute('aria-expanded',a)};
+document.addEventListener('click',e=>{if(!e.target.closest('#subMenu'))$('#subMenu').classList.remove('aberto')});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){$('#subMenu').classList.remove('aberto');menuMobile(false)}});
 
 document.addEventListener('error',e=>{const i=e.target;if(i.tagName!=='IMG')return;if(i.dataset.ilus&&!i.dataset.trocou&&ILUS[i.dataset.ilus]){i.dataset.trocou=1;i.src=ILUS[i.dataset.ilus]}else i.classList.add('falhou')},true);
 render();
