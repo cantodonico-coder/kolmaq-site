@@ -1,0 +1,21 @@
+ATALHOS KOLMAQ
+==============
+
+JEITO MAIS BONITO (vira aplicativo, com ícone próprio)
+-------------------------------------------------------
+PC (Chrome ou Edge):
+ 1. Abra o site:   https://cantodonico-coder.github.io/kolmaq-site/
+ 2. Clique no ícone de instalar na barra de endereço (monitor com seta)
+    ou  ⋮  > Transmitir, salvar e compartilhar > Instalar página como app.
+ 3. Repita no painel: https://cantodonico-coder.github.io/kolmaq-site/painel.html
+ Pronto: ícones "Kolmaq" e "Kolmaq OS" na área de trabalho, menu Iniciar e barra de tarefas.
+
+Celular Android (Chrome):  ⋮  > Adicionar à tela inicial > Instalar.
+iPhone (Safari):  Compartilhar (quadrado com seta) > Adicionar à Tela de Início.
+
+JEITO RÁPIDO (Windows)
+----------------------
+ 1. Copie "Kolmaq - Site.url" e "Kolmaq - Painel OS.url" para a Área de Trabalho.
+ 2. Duplo clique abre no navegador.
+ 3. Se o ícone não aparecer: botão direito > Propriedades > Alterar ícone > Procurar
+    > escolha site.ico ou painel.ico (copie os .ico para uma pasta fixa antes, ex.: Documentos).

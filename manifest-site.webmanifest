@@ -1,0 +1,32 @@
+{
+ "id": "kolmaq-site",
+ "name": "Kolmaq Informática",
+ "short_name": "Kolmaq",
+ "description": "Loja e assistência técnica em Porto Alegre",
+ "start_url": "./index.html",
+ "scope": "./",
+ "display": "standalone",
+ "background_color": "#FFFFFF",
+ "theme_color": "#0A84FF",
+ "lang": "pt-BR",
+ "icons": [
+  {
+   "src": "icones/site-192.png",
+   "sizes": "192x192",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "icones/site-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "icones/site-maskable-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "maskable"
+  }
+ ]
+}

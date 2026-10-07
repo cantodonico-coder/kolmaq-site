@@ -31,11 +31,11 @@ function setup() {
 
   const p = ss.getSheetByName('Produtos');
   if (p.getLastRow() === 1) p.getRange(2, 1, 5, 10).setValues([
-    ['p1','Impressora Laser Monocromática M2020W','Impressoras','','','Promoção','Laser compacta com Wi‑Fi.','','https://kolmaq.com.br/uploads/banners/impressora-laser-monocromatica-m2020w-desktop-77f127.jpeg','sim'],
+    ['p1','Impressora Laser Monocromática M2020W','Impressoras','','','Promoção','Laser compacta com Wi‑Fi.','','','sim'],
     ['p2','Impressora Multifuncional Laser LaserJet M1132','Impressoras','','','Promoção','Imprime, copia e digitaliza.','','','sim'],
     ['p3','Impressora Multifuncional Laser MFP 135A','Impressoras','','','Promoção','Imprime, copia e digitaliza.','','','sim'],
-    ['p4','MacBook Pro','Notebooks','','','Promoção','Consulte configuração e condições.','','https://kolmaq.com.br/uploads/banners/macbook-pro-desktop-c7055b.jpg','sim'],
-    ['p5','Dell Inspiron 5423','Notebooks','','','','Consulte configuração e condições.','','https://kolmaq.com.br/uploads/banners/dell-desktop-8b1b21.jpg','sim']
+    ['p4','MacBook Pro','Notebooks','','','Promoção','Consulte configuração e condições.','','','sim'],
+    ['p5','Dell Inspiron 5423','Notebooks','','','','Consulte configuração e condições.','','','sim']
   ]);
   if (p.getRange(2, 8).getValue() === '') {
     const sp = [
@@ -51,17 +51,17 @@ function setup() {
   }
   const s = ss.getSheetByName('Servicos');
   if (s.getLastRow() === 1) s.getRange(2, 1, 5, 7).setValues([
-    ['s1','Conserto e manutenção de impressoras','','','Jato de tinta, tanque e laser. Limpeza, troca de peças e ajuste de puxador de papel.','https://kolmaq.com.br/uploads/servicos/serv_1_1786650672_6a7e203064642.jpg','sim'],
-    ['s2','Manutenção de computadores e notebooks','','','PCs, notebooks e projetores. Formatação, upgrade, limpeza e troca de peças.','https://kolmaq.com.br/uploads/servicos/serv_3_1786651344_6a7e22d03c335.jpg','sim'],
-    ['s3','Conserto de videogames','','','PlayStation 2/3/4, Xbox 360/One, Nintendo Wii e outros.','https://kolmaq.com.br/uploads/servicos/serv_3_1786651344_6a7e22d03c335.jpg','sim'],
-    ['s4','Conserto de televisores','','','Samsung, LG, Philips, TCL, AOC, Panasonic, CCE, Buster e outras marcas.','https://kolmaq.com.br/uploads/servicos/serv_2_1786650943_6a7e213f60adc.jpg','sim'],
-    ['s5','Manutenção de celulares','','','Hardware e software, diversas marcas e modelos.','https://kolmaq.com.br/uploads/servicos/serv_4_1786651517_6a7e237d2aff8.jpg','sim']
+    ['s1','Conserto e manutenção de impressoras','','','Jato de tinta, tanque e laser. Limpeza, troca de peças e ajuste de puxador de papel.','','sim'],
+    ['s2','Manutenção de computadores e notebooks','','','PCs, notebooks e projetores. Formatação, upgrade, limpeza e troca de peças.','','sim'],
+    ['s3','Conserto de videogames','','','PlayStation 2/3/4, Xbox 360/One, Nintendo Wii e outros.','','sim'],
+    ['s4','Conserto de televisores','','','Samsung, LG, Philips, TCL, AOC, Panasonic, CCE, Buster e outras marcas.','','sim'],
+    ['s5','Manutenção de celulares','','','Hardware e software, diversas marcas e modelos.','','sim']
   ]);
   const pr = ss.getSheetByName('Promocoes');
   if (pr.getLastRow() === 1) pr.getRange(2, 1, 3, 6).setValues([
-    ['MacBook Pro','Super promoção. Desempenho e tela Retina para trabalhar e criar.','preto','https://kolmaq.com.br/uploads/banners/macbook-pro-desktop-c7055b.jpg','sim','p4'],
-    ['Impressora Laser M2020W','Imperdível. Laser monocromática compacta com Wi‑Fi.','azul','https://kolmaq.com.br/uploads/banners/impressora-laser-monocromatica-m2020w-desktop-77f127.jpeg','sim','p1'],
-    ['Dell Inspiron 5423','Notebook para estudo e trabalho. Consulte condições.','magenta','https://kolmaq.com.br/uploads/banners/dell-desktop-8b1b21.jpg','sim','p5']
+    ['MacBook Pro','Super promoção. Desempenho e tela Retina para trabalhar e criar.','preto','','sim','p4'],
+    ['Impressora Laser M2020W','Imperdível. Laser monocromática compacta com Wi‑Fi.','azul','','sim','p1'],
+    ['Dell Inspiron 5423','Notebook para estudo e trabalho. Consulte condições.','magenta','','sim','p5']
   ]);
 
   const os = ss.getSheetByName('OS');

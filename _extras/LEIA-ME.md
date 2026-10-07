@@ -1,11 +1,14 @@
-# Kolmaq — instalação (versão 2 · 01/10/2026)
+# Kolmaq — instalação (versão 4 · 01/10/2026)
 
 ## Atualizar o GitHub (cantodonico-coder.github.io/kolmaq-site)
 1. Descompacte este zip.
 2. No repositório: **Add file → Upload files**.
-3. Arraste TUDO que está dentro da pasta (inclusive `_extras`, que não é publicada).
+3. Arraste TUDO que está dentro da pasta (inclusive `icones`, `_extras` e `_atalhos`; pastas com `_` não são publicadas).
 4. **Commit changes** → aguarde o ✅ verde em **Actions** → recarregue com Ctrl + F5.
 5. Conferência: o topo deve mostrar **Serviços ▾**.
+
+## Atalhos
+Veja `_atalhos/COMO-USAR.txt`: instalar site e painel como aplicativo (PC e celular) ou usar os atalhos .url.
 
 
 Arquivos:
